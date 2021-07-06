@@ -42,6 +42,8 @@ history_chain=[]
     )
 ])
 async def _load_messages(ctx,*, chain_length=5):
+    loading_message = await ctx.send("Loading chat history...")
+
     global history_chain
     history_chain = []
 
@@ -68,8 +70,12 @@ async def _load_messages(ctx,*, chain_length=5):
         else:
             consume(messages_iter,4)
     
+    """
     for messageChain in history_chain:
         print_messages(messageChain.messages)
+    """
+    await loading_message.edit(content="Chat history loaded")
+    
 
 def consume(iterator, n):
     "Advance the iterator n-steps ahead. If n is none, consume entirely."
